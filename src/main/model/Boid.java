@@ -1,6 +1,7 @@
 package main.model;
 
 import main.behavior.FlockWeights;
+import main.behavior.RandomBehavior;
 import main.simulation.*;
 import main.behavior.BehaviorStrategy;
 import main.behavior.FlockBehavior;
@@ -31,8 +32,13 @@ public class Boid {
         this.vx = (Math.random() - 0.5) * 2;
         this.vy = (Math.random() - 0.5) * 2;
         switch (type) {
-            case RANDOM -> this.behaviorStrategy = new RandomBehavior();
-            default -> this.behaviorStrategy = new FlockBehavior(FlockWeights.standard());
+            case RANDOM: 
+                this.behaviorStrategy = new RandomBehavior();
+                break;
+            
+            case STANDARD: 
+                this.behaviorStrategy = new FlockBehavior(FlockWeights.standard());
+                break;
         }
     }
 

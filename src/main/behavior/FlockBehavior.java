@@ -1,3 +1,10 @@
+package main.behavior;
+
+import java.util.List;
+import main.model.Boid;
+import main.simulation.Forces;
+import main.simulation.Vector2D;
+
 public class FlockBehavior implements BehaviorStrategy {
 
     private final FlockWeights flockweights;
@@ -6,9 +13,7 @@ public class FlockBehavior implements BehaviorStrategy {
         this.flockweights = flockweights;
     }
 
-    public FlockWeights getFlockWeights() {
-        return flockWeights;     
-    }
+    
 
     @Override
     public Forces calculateForces(Boid boid, List<Boid> neighbors) {
@@ -149,4 +154,10 @@ public class FlockBehavior implements BehaviorStrategy {
 
         return Vector2D.ZERO;
     }
+
+    // @Override
+    // public Forces calculateForces(Boid boid, List<Boid> neighbors) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'calculateForces'");
+    // }
 }

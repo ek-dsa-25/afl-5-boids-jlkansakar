@@ -3,7 +3,8 @@ package main.model;
 import java.awt.Color;
 
 public enum BoidType {
-    STANDARD(Color.WHITE);
+    STANDARD(Color.WHITE),
+    RANDOM(Color.MAGENTA);
 
     private final Color color;
 
@@ -15,5 +16,5 @@ public enum BoidType {
         return color;
     }
 
-    RANDOM(Color.MAGENTA)
+    
 }
