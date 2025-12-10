@@ -14,4 +14,6 @@ public enum BoidType {
     public Color getColor() {
         return color;
     }
+
+    RANDOM(Color.MAGENTA)
 }
