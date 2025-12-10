@@ -1,19 +1,22 @@
 package main.behavior;
 
-import java.util.List;
 import main.model.Boid;
 import main.simulation.Forces;
 import main.simulation.Vector2D;
 
+import java.util.List;
+
 public class FlockBehavior implements BehaviorStrategy {
 
-    private final FlockWeights flockweights;
+    private final FlockWeights flockWeights;
 
-    public FlockBehavior(FlockWeights flockweights) {
-        this.flockweights = flockweights;
+    public FlockBehavior(FlockWeights flockWeights) {
+        this.flockWeights = flockWeights;
     }
 
-    
+    public FlockWeights getFlockWeights() {
+        return flockWeights;
+    }
 
     @Override
     public Forces calculateForces(Boid boid, List<Boid> neighbors) {
@@ -24,14 +27,10 @@ public class FlockBehavior implements BehaviorStrategy {
         FlockWeights weights = getFlockWeights();
 
         Vector2D separation = calculateSeparation(boid, neighbors, weights);
-        Vector2D alignment = calculateAlignment(boid, neighbors, weights);
-        Vector2D cohesion = calculateCohesion(boid, neighbors, weights);
+        Vector2D alignment  = calculateAlignment(boid, neighbors, weights);
+        Vector2D cohesion   = calculateCohesion(boid, neighbors, weights);
 
         return new Forces(separation, alignment, cohesion);
-    }
-
-    public FlockWeights getFlockWeights() {
-        return FlockWeights.standard();
     }
 
     private Vector2D calculateSeparation(Boid boid, List<Boid> neighbors, FlockWeights weights) {
@@ -154,10 +153,4 @@ public class FlockBehavior implements BehaviorStrategy {
 
         return Vector2D.ZERO;
     }
-
-    // @Override
-    // public Forces calculateForces(Boid boid, List<Boid> neighbors) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'calculateForces'");
-    // }
 }

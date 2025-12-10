@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomBehavior implements BehaviorStrategy {
-private static final double MAX_TURN_ANGLE = Math.toRadians(15); 
-    private static final double MAX_FORCE = 0.03;                    
+    private static final double MAX_TURN_ANGLE = Math.toRadians(15);
+    private static final double MAX_FORCE = 0.03;
 
     private final Random random = new Random();
 
@@ -20,7 +20,7 @@ private static final double MAX_TURN_ANGLE = Math.toRadians(15);
 
         double speed = Math.sqrt(vx * vx + vy * vy);
         if (speed == 0) {
-           
+
             speed = 1.0;
             vx = speed;
             vy = 0.0;
@@ -28,14 +28,12 @@ private static final double MAX_TURN_ANGLE = Math.toRadians(15);
 
         double angle = Math.atan2(vy, vx);
 
-        
         double delta = (random.nextDouble() * 2.0 - 1.0) * MAX_TURN_ANGLE;
         double newAngle = angle + delta;
 
         double desiredVx = Math.cos(newAngle) * speed;
         double desiredVy = Math.sin(newAngle) * speed;
 
-      
         double steerX = desiredVx - vx;
         double steerY = desiredVy - vy;
 
@@ -46,7 +44,6 @@ private static final double MAX_TURN_ANGLE = Math.toRadians(15);
         }
 
         Vector2D randomSteer = new Vector2D(steerX, steerY);
-
 
         return new Forces(randomSteer, Vector2D.ZERO, Vector2D.ZERO);
     }

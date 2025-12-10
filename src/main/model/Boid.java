@@ -31,15 +31,18 @@ public class Boid {
         this.type = type;
         this.vx = (Math.random() - 0.5) * 2;
         this.vy = (Math.random() - 0.5) * 2;
+        BehaviorStrategy strategy;
         switch (type) {
-            case RANDOM: 
-                this.behaviorStrategy = new RandomBehavior();
+            case RANDOM:
+                strategy = new RandomBehavior();
                 break;
-            
-            case STANDARD: 
-                this.behaviorStrategy = new FlockBehavior(FlockWeights.standard());
+
+            case STANDARD:
+            default:
+                strategy = new FlockBehavior(FlockWeights.standard());
                 break;
         }
+        this.behaviorStrategy = strategy;
     }
 
     public Boid(int id, double x, double y, BoidType type, BehaviorStrategy behaviorStrategy) {
@@ -75,35 +78,56 @@ public class Boid {
     }
 
     private void wrapAround(int width, int height) {
-        if (x < 0) x = width;
-        if (x > width) x = 0;
-        if (y < 0) y = height;
-        if (y > height) y = 0;
+        if (x < 0)
+            x = width;
+        if (x > width)
+            x = 0;
+        if (y < 0)
+            y = height;
+        if (y > height)
+            y = 0;
     }
 
     public void render(Graphics2D g2d) {
         g2d.setColor(type.getColor());
-        
+
         double angle = Math.atan2(vy, vx);
         AffineTransform oldTransform = g2d.getTransform();
-        
+
         g2d.translate(x, y);
         g2d.rotate(angle);
-        
-        int[] xPoints = {BOID_SIZE, -BOID_SIZE/2, -BOID_SIZE/2};
-        int[] yPoints = {0, BOID_SIZE/2, -BOID_SIZE/2};
+
+        int[] xPoints = { BOID_SIZE, -BOID_SIZE / 2, -BOID_SIZE / 2 };
+        int[] yPoints = { 0, BOID_SIZE / 2, -BOID_SIZE / 2 };
         g2d.fillPolygon(xPoints, yPoints, 3);
-        
+
         g2d.setTransform(oldTransform);
     }
 
-    public double getX() { return x; }
-    public double getY() { return y; }
-    public double getVx() { return vx; }
-    public double getVy() { return vy; }
-    public int getId() { return id; }
-    public BoidType getType() { return type; }
-    
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getVx() {
+        return vx;
+    }
+
+    public double getVy() {
+        return vy;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public BoidType getType() {
+        return type;
+    }
+
     public double distanceTo(Boid other) {
         double dx = x - other.x;
         double dy = y - other.y;

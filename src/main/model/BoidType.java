@@ -16,5 +16,4 @@ public enum BoidType {
         return color;
     }
 
-    
 }

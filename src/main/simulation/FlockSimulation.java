@@ -33,7 +33,7 @@ public class FlockSimulation {
         int id = boids.size();
         double x = Math.random() * width;
         double y = Math.random() * height;
-        boids.add(new Boid(id, x, y, type));
+        boids.add(new Boid(id, x, y, Math.random() < 0.5 ? BoidType.RANDOM : BoidType.STANDARD));
     }
 
     public void setBoidCount(int count) {
